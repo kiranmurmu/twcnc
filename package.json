@@ -5,7 +5,10 @@
   "main": "lib/twcnc.js",
   "types": "lib/twcnc.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage",
+    "build": "tsc && prettier --write lib/**/*.{js,ts}",
+    "format": "prettier --write src/**/*.{js,ts}",
+    "lint": "eslint --fix src/**/*.{js,ts}"
   },
   "files": [
     "lib/**/*"
