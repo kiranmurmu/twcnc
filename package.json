@@ -2,17 +2,23 @@
   "name": "twcnc",
   "version": "1.0.0",
   "description": "A tiny utility for constructing 'className' for Tailwind CSS.",
-  "main": "index.js",
+  "main": "lib/twcnc.js",
+  "types": "lib/twcnc.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiranmurmu/twcnc.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "twcnc"
+  ],
+  "author": "Kiran Murmu",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kiranmurmu/twcnc/issues"
   },
