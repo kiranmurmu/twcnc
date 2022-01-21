@@ -2,5 +2,5 @@ module.exports = {
   transform: {
     "\\.[jt]sx?$": "ts-jest",
   },
-  transformIgnorePatterns: ["/node_modules/", "/lib/"],
+  transformIgnorePatterns: ["/node_modules/", "/lib/", "/coverage/"],
 };
