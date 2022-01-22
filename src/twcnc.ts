@@ -51,7 +51,8 @@ function reduce(_arg: argv): string[] {
   const _res: string[] = [""];
   switch (typeof _arg) {
     case "string":
-      if (!!_arg) return _twc.split(_arg);
+      const _val: string = _twc.clean(_arg);
+      if (!!_val) _res.push(..._twc.split(_val));
       break;
     case "object":
       if (Array.isArray(_arg)) {
@@ -72,7 +73,7 @@ function reduce(_arg: argv): string[] {
                   _res.push(_key + _cnv);
                 }
               } else {
-                _res.push(_key, ..._twc.split(_val));
+                _res.push(..._twc.split(_key + " " + _val));
               }
             } else if (typeof _val === "object") {
               _res.push(...reduce(_val));
@@ -92,13 +93,23 @@ function twcnc(...args: argv[]): string {
   return !!args.length
     ? args
         .map((_arg) => {
-          return reduce(_arg);
+          return reduce(_arg).join(" ").trim();
         })
         .join(" ")
         .trim()
     : "";
 
-  /*for (const _arg of args) {
+  /*
+  return !!args.length
+    ? args
+        .map((_arg) => {
+          return reduce(_arg).join(" ").trim();
+        })
+        .join(" ")
+        .trim()
+    : "";
+
+for (const _arg of args) {
     if (
       (typeof _arg === "string" && !!_arg) ||
       (typeof _arg === "object" && Array.isArray(_arg)
