@@ -26,7 +26,7 @@ test("Test 02: Input type - string array | string array classes", () => {
   );
 });
 
-test("Test 03: Input type - object | key, value classes", () => {
+test("Test 03: Input type - object | object classes with key modifier", () => {
   expect(
     twcnc({
       "focus:": "text-xl font-medium text-black",
@@ -35,5 +35,17 @@ test("Test 03: Input type - object | key, value classes", () => {
   ).toBe(
     "focus:text-xl focus:font-medium focus:text-black " +
       "hover:shadow-lg hover:flex hover:items-center hover:space-x-4"
+  );
+});
+
+test("Test 04: Input type - object | object classes without key modifier", () => {
+  expect(
+    twcnc({
+      flex: "flex-wrap text-xl font-medium text-black",
+      grid: "grid-cols-4 gap-4 shadow-lg items-center",
+    })
+  ).toBe(
+    "flex flex-wrap text-xl font-medium text-black " +
+      "grid grid-cols-4 gap-4 shadow-lg items-center"
   );
 });
