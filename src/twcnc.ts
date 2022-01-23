@@ -6,49 +6,14 @@ interface twc {
   clean: (_val: string) => string;
   split: (_val: string) => string[];
 }
-/*
-isMod: (_val: string) => boolean;
-check: (_val: argv) => boolean;
 
-function clean(_val: string) {
-  return _val.replace(/\s\s+/g, " ").trim();
-}
-
-function split(_val: string) {
-  return clean(_val).split(" ");
-}
-*/
 const _twc: twc = {
   clean: (_val) => _val.replace(/\s\s+/g, " ").trim(),
   split: (_val) => _twc.clean(_val).split(" "),
-  /*
-  isMod: (_val) => {
-    if (
-      !!_val &&
-      !_val.includes(" ") &&
-      _val.endsWith(":") &&
-      !_val.startsWith(":")
-    )
-      return true;
-    else return false;
-  },
-
-  check: (_val) => {
-    switch (typeof _val) {
-      case "object":
-        return !!_val && Array.isArray(_val)
-          ? !!_val.length
-          : !!Object.keys(_val).length;
-      case "string":
-        return !!_val;
-      default:
-        return false;
-    }
-  },*/
 };
 
 function reduce(_arg: argv): string[] {
-  const _res: string[] = [""];
+  const _res: string[] = [];
   switch (typeof _arg) {
     case "string":
       const _val: string = _twc.clean(_arg);
@@ -89,37 +54,11 @@ function reduce(_arg: argv): string[] {
 }
 
 function twcnc(...args: argv[]): string {
-  // const _res: string[] = [];
-  return !!args.length
-    ? args
-        .map((_arg) => {
-          return reduce(_arg).join(" ").trim();
-        })
-        .join(" ")
-        .trim()
-    : "";
-
-  /*
-  return !!args.length
-    ? args
-        .map((_arg) => {
-          return reduce(_arg).join(" ").trim();
-        })
-        .join(" ")
-        .trim()
-    : "";
-
-for (const _arg of args) {
-    if (
-      (typeof _arg === "string" && !!_arg) ||
-      (typeof _arg === "object" && Array.isArray(_arg)
-        ? !!_arg.length
-        : !!Object.keys(_arg).length)
-    ) {
-      _res.push(...reduce(_arg));
-    }
-  }*/
-  // return _res.join(" ").trim();
+  const _res: string[] = [];
+  for (const _arg of args) {
+    _res.push(...reduce(_arg));
+  }
+  return _res.join(" ").trim();
 }
 
 export default twcnc;
