@@ -1,4 +1,4 @@
-import twcnc from "../twcnc";
+import twcnc from "../src/twcnc";
 
 test("Test 00: Input type - all | invalid classes", () => {
   expect(twcnc("", [], {})).toBe("");
