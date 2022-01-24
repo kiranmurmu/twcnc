@@ -40,8 +40,20 @@ function reduce(_arg: argv): string[] {
               } else {
                 _res.push(..._twc.split(_key + " " + _val));
               }
-            } else if (typeof _val === "object") {
-              _res.push(...reduce(_val));
+            } else if (typeof _val === "object" && Array.isArray(_val)) {
+              const _arr: string[] = reduce(_val);
+              if (
+                !_key.includes(" ") &&
+                _key.endsWith(":") &&
+                !_key.startsWith(":")
+              ) {
+                for (const _cnv of _arr) {
+                  _res.push(_key + _cnv);
+                }
+              } else {
+                _arr.unshift(_key);
+                _res.push(..._arr);
+              }
             } else {
               if (_val) _res.push(..._twc.split(_key));
             }
