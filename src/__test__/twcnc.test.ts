@@ -49,3 +49,36 @@ test("Test 04: Input type - object | object classes without key modifier", () =>
       "grid grid-cols-4 gap-4 shadow-lg items-center"
   );
 });
+
+test("Test 05: Input type - object | object classes with string array", () => {
+  expect(
+    twcnc({
+      flex: ["flex-wrap text-xl", "font-medium text-black"],
+      grid: ["grid-cols-4 gap-4", "shadow-lg items-center"],
+    })
+  ).toBe(
+    "flex flex-wrap text-xl font-medium text-black " +
+      "grid grid-cols-4 gap-4 shadow-lg items-center"
+  );
+});
+
+test("Test 06: Input type - object | object classes with string array and key modifier", () => {
+  expect(
+    twcnc({
+      "focus:": ["text-xl", "font-medium", "text-black"],
+      "hover:": ["shadow-lg flex", "items-center space-x-4"],
+    })
+  ).toBe(
+    "focus:text-xl focus:font-medium focus:text-black " +
+      "hover:shadow-lg hover:flex hover:items-center hover:space-x-4"
+  );
+});
+
+test("Test 07: Input type - object | object classes with boolean", () => {
+  expect(
+    twcnc({
+      "flex flex-wrap text-xl font-medium text-black": true,
+      "grid grid-cols-4 gap-4 shadow-lg items-center": false,
+    })
+  ).toBe("flex flex-wrap text-xl font-medium text-black");
+});
