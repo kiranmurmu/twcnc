@@ -13,7 +13,8 @@
     "format:src": "prettier --write src/**/*.{js,ts}",
     "format:lib": "prettier --write lib/**/*.{js,ts}",
     "lint": "eslint --fix src/**/*.{js,ts}",
-    "bench": "npm run build && node bench"
+    "bench": "npm run build && npm run bench:only",
+    "bench:only": "babel-node bench -x .ts"
   },
   "files": [
     "lib/**/*"
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
+    "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/benchmark": "^2.1.1",
