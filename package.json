@@ -14,7 +14,7 @@
     "format:lib": "prettier --write lib/**/*.{js,ts}",
     "lint": "eslint --fix src/**/*.{js,ts}",
     "bench": "npm run build && npm run bench:only",
-    "bench:only": "babel-node bench -x .ts"
+    "bench:only": "babel-node -x .ts -- bench"
   },
   "files": [
     "lib/**/*"
