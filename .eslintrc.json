@@ -4,6 +4,6 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "ignorePatterns": ["lib", "node_modules", "coverage"],
+  "ignorePatterns": ["lib", "node_modules", "coverage", "bench"],
   "extends": ["plugin:@typescript-eslint/recommended"]
 }

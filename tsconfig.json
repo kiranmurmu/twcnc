@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "lib": ["ESNext"],
-    "module": "CommonJS",
+    "target": "ESNext",
     "declaration": true,
     "outDir": "lib",
-    "strict": true
+    "strict": true,
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "isolatedModules": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "test", "coverage"]
+  "exclude": ["node_modules"]
 }
