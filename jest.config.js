@@ -1,6 +1,6 @@
 module.exports = {
   transform: {
-    "\\.[jt]sx?$": "ts-jest",
+    "\\.[jt]sx?$": "babel-jest",
   },
-  transformIgnorePatterns: ["/node_modules/", "/lib/", "/coverage/", "/bench/"],
+  transformIgnorePatterns: ["/node_modules/"],
 };
