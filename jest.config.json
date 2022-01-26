@@ -2,5 +2,5 @@
   "transform": {
     "\\.[jt]sx?$": "babel-jest"
   },
-  "transformIgnorePatterns": ["/node_modules/"]
+  "testRegex": ["/test/.*(test|spec)\\.[jt]sx?$"]
 }
