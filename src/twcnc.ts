@@ -12,12 +12,35 @@ const _twc: twc = {
   split: (_val) => _twc.clean(_val).split(" "),
 };
 
-function reduce(_arg: argv): string[] {
+function _cn_str(_val: string): string[] {
+  const _res: string = _val.replace(/\s\s+/g, " ").trim();
+  if (!!_res) return _res.split(" ");
+  return [""];
+}
+
+function _cn_obj(_ent: string[] | twcobj): string {
+  let _res = "";
+  if (Array.isArray(_ent)) {
+    for (const _val of _ent) {
+      if (!_val) continue;
+      if (_res) _res += " ";
+      _res += _val;
+    }
+  } else {
+    for (const _key in _ent) {
+      if (!_ent[_key] || !_key) continue;
+      if (_res) _res += " ";
+      _res += _ent[_key];
+    }
+  }
+  return _res;
+}
+
+function _cn_mix(_arg: argv): string[] {
   const _res: string[] = [];
   switch (typeof _arg) {
     case "string":
-      const _val: string = _twc.clean(_arg);
-      if (!!_val) _res.push(..._twc.split(_val));
+      _res.push(..._cn_str(_arg));
       break;
     case "object":
       if (Array.isArray(_arg)) {
@@ -41,7 +64,7 @@ function reduce(_arg: argv): string[] {
                 _res.push(..._twc.split(_key + " " + _val));
               }
             } else if (typeof _val === "object" && Array.isArray(_val)) {
-              const _arr: string[] = reduce(_val);
+              const _arr: string[] = _cn_mix(_val);
               if (
                 !_key.includes(" ") &&
                 _key.endsWith(":") &&
@@ -68,7 +91,7 @@ function reduce(_arg: argv): string[] {
 function twcnc(...args: argv[]): string {
   const _res: string[] = [];
   for (const _arg of args) {
-    _res.push(...reduce(_arg));
+    _res.push(..._cn_mix(_arg));
   }
   return _res.join(" ").trim();
 }
