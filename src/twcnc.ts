@@ -105,7 +105,7 @@ function twcnc(...args: argv[]): string {
     _res += _cn_mix(_arg);
   }
 
-  return _res.trim();
+  return _res;
 }
 
 export default twcnc;
