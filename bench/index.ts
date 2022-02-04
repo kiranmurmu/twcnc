@@ -1,7 +1,12 @@
 import { Suite } from "benchmark";
 import twcnc from "../lib/twcnc";
 
-function bench(name: string, ...args: string[]) {
+type cobj = {
+  [key: string]: string | boolean | string[];
+};
+type argv = string | string[] | cobj;
+
+function bench(name: string, ...args: argv[]) {
   console.log(`\n# ${name}`);
   new Suite()
     .add(() => twcnc.apply(twcnc, args))
@@ -11,8 +16,26 @@ function bench(name: string, ...args: string[]) {
     .run();
 }
 
-bench(
-  "string classes",
-  "text-xl font-medium text-black",
-  "shadow-lg flex items-center space-x-4"
-);
+bench("String", "ab cd", "ef gh");
+
+bench("Array", ["ab cd ef gh"]);
+
+bench("Object", {
+  ab: "cd ef gh",
+});
+
+bench("Object w/ Class Modifier", {
+  "ab:": "cd ef gh",
+});
+
+bench("Object w/ Array", {
+  ab: ["cd", "ef", "gh"],
+});
+
+bench("Object w/ Array & Class Modifier", {
+  "ab:": ["cd", "ef", "gh"],
+});
+
+bench("Object w/ Boolean", {
+  "ab cd ef gh": true,
+});
