@@ -21,27 +21,25 @@ function _cn_str(_key: string, _val: string): string {
   let _res = "";
   let _tmp = "";
 
-  if (_key && !_key.includes(" ") && _key.endsWith(":")) {
-    if (_val) {
+  if (_key && _val) {
+    if (!_key.includes(" ") && _key.endsWith(":") && _key != ":") {
       for (const _cnv of _val.split(" ")) {
         if (!_cnv) continue;
         if (_res) _res += " ";
         _res += _key + _cnv;
       }
-    }
-  } else {
-    if (_val) {
+    } else {
       for (const _cnv of _val.split(" ")) {
         if (!_cnv) continue;
         if (_tmp) _tmp += " ";
         _tmp += _cnv;
       }
-    }
 
-    if (_tmp) {
-      if (_key) _res += _key;
-      if (_res) _res += " ";
-      _res += _tmp;
+      if (_tmp) {
+        if (_key && _key != ":") _res += _key;
+        if (_res) _res += " ";
+        _res += _tmp;
+      }
     }
   }
 
@@ -52,8 +50,8 @@ function _cn_arr(_key: string, _val: string[]): string {
   let _res = "";
   let _tmp = "";
 
-  if (_key && !_key.includes(" ") && _key.endsWith(":")) {
-    if (_val) {
+  if (_key && _val) {
+    if (!_key.includes(" ") && _key.endsWith(":") && _key != ":") {
       for (const _cni of _val) {
         if (!_cni) continue;
 
@@ -63,9 +61,7 @@ function _cn_arr(_key: string, _val: string[]): string {
           _res += _key + _cnv;
         }
       }
-    }
-  } else {
-    if (_val) {
+    } else {
       for (const _cni of _val) {
         if (!_cni) continue;
 
@@ -75,26 +71,12 @@ function _cn_arr(_key: string, _val: string[]): string {
           _tmp += _cnv;
         }
       }
-    }
 
-    if (_tmp) {
-      if (_key) _res += _key;
-      if (_res) _res += " ";
-      _res += _tmp;
-    }
-  }
-
-  return _res;
-}
-
-function _cn_bol(_key: string, _val: boolean) {
-  let _res = "";
-
-  if (_key && _val) {
-    for (const _cnv of _key.split(" ")) {
-      if (!_cnv) continue;
-      if (_res) _res += " ";
-      _res += _cnv;
+      if (_tmp) {
+        if (_key && _key != ":") _res += _key;
+        if (_res) _res += " ";
+        _res += _tmp;
+      }
     }
   }
 
@@ -106,29 +88,26 @@ function _cn_obj(_ent: string[] | cobj): string {
   let _tmp = "";
 
   if (Array.isArray(_ent)) {
-    _res += _cn_arr("", _ent);
+    _res += _cn_arr(":", _ent);
   } else {
     for (const _key in _ent) {
       const _val = _ent[_key];
 
       switch (typeof _val) {
         case "string":
-          _tmp = _cn_str(_cn_cln(_key), _val);
-          if (!_tmp) break;
+          if (!(_tmp = _cn_str(_cn_cln(_key), _val))) break;
           if (_res) _res += " ";
           _res += _tmp;
           break;
 
         case "object":
-          _tmp = _cn_arr(_cn_cln(_key), _val);
-          if (!_tmp) break;
+          if (!(_tmp = _cn_arr(_cn_cln(_key), _val))) break;
           if (_res) _res += " ";
           _res += _tmp;
           break;
 
         default:
-          _tmp = _cn_bol(_key, _val);
-          if (!_tmp) break;
+          if (!_val || !(_tmp = _cn_cln(_key))) break;
           if (_res) _res += " ";
           _res += _tmp;
           break;

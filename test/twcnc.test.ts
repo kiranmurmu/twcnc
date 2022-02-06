@@ -42,11 +42,11 @@ test("Test 03: Object", () => {
 test("Test 04: Object w/ Class Modifier", () => {
   expect(
     twcnc({
-      "focus:": " text-xl font-medium   text-black   ",
+      ":": " text-xl font-medium   text-black   ",
       "hover:": "shadow-lg   flex items-center    space-x-4 ",
     })
   ).toBe(
-    "focus:text-xl focus:font-medium focus:text-black " +
+    "text-xl font-medium text-black " +
       "hover:shadow-lg hover:flex hover:items-center hover:space-x-4"
   );
 });
@@ -66,11 +66,11 @@ test("Test 05: Object w/ Array", () => {
 test("Test 06: Object w/ Array & Class Modifier", () => {
   expect(
     twcnc({
-      "focus:": [" text-xl ", "  font-medium", "text-black   "],
+      ":": [" text-xl ", "  font-medium", "text-black   "],
       "hover:": ["shadow-lg   flex", "  items-center  space-x-4 "],
     })
   ).toBe(
-    "focus:text-xl focus:font-medium focus:text-black " +
+    "text-xl font-medium text-black " +
       "hover:shadow-lg hover:flex hover:items-center hover:space-x-4"
   );
 });
@@ -92,13 +92,13 @@ test("Test 07: Object w/ Boolean", () => {
 test("Test 08: Invalid", () => {
   expect(
     twcnc(null, undefined, "", " ", [], {}, [null, undefined, "", " "], {
-      " ": "",
+      " ": "foo",
       "0": " ",
       "1": null,
       "2": undefined,
       "3": [],
       "4": [null, undefined, "", " "],
-      " :": "",
+      " :": " ",
       "0:": " ",
       "1:": null,
       "2:": undefined,
