@@ -1,6 +1,6 @@
 {
   "name": "twcnc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny utility for constructing `className` strings using Tailwind CSS class & pseudo-class modifier.",
   "main": "lib/twcnc.js",
   "types": "lib/twcnc.d.ts",
